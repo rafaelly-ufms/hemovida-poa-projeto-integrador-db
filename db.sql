@@ -47,3 +47,31 @@ FROM Doador d
 JOIN Agendamento a ON d.id = a.doador_id
 JOIN Doacao doa ON doa.agendamento_id = a.id
 WHERE d.cpf = '12345678900';
+
+-- CONSULTAR TODOS OS DOADORES:
+SELECT * FROM Doador;
+
+-- CONSULTAR ESTOQUE DE TODOS OS TIPOS SANGUÍNEOS:
+SELECT * FROM Estoque;
+
+-- INSERIR NOVO AGENDAMENTO:
+INSERT INTO Agendamento (doador_id, posto_id, data_hora)
+VALUES (1, 2, '2025-05-20 09:00:00');
+
+-- INSERIR NOVA DOAÇÃO:
+INSERT INTO Doacao (agendamento_id)
+VALUES (1);
+
+-- ENVIAR NOTIFICAÇÃO:
+INSERT INTO Notificacao (doador_id, mensagem)
+VALUES (1, 'Obrigado por sua doação! Você pode doar novamente em 60 dias.');
+
+-- CONSULTAR TODAS AS NOTIFICAÇÕES DE UM DOADOR:
+SELECT * FROM Notificacao WHERE doador_id = 1;
+
+-- RELATÓRIO COMPLETO DE DOAÇÕES:
+SELECT d.nome, d.tipo_sanguineo, doa.data_doacao, a.data_hora
+FROM Doador d
+JOIN Agendamento a ON d.id = a.doador_id
+JOIN Doacao doa ON doa.agendamento_id = a.id
+ORDER BY doa.data_doacao DESC;
